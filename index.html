@@ -123,21 +123,21 @@
   </section>
 
   <section class="section">
-    <div class="section-container stats-grid">
+    <div class="section-container stats-grid" id="stats-section">
       <div class="stat-item fade-up">
-        <div class="stat-number">500+</div>
+        <div class="stat-number"><span class="counter" data-target="500">0</span>+</div>
         <div class="stat-label">Clients satisfaits</div>
       </div>
       <div class="stat-item fade-up">
-        <div class="stat-number"><1h</div>
+        <div class="stat-number"><<span class="counter" data-target="1">0</span>h</div>
         <div class="stat-label">Délai de réponse</div>
       </div>
       <div class="stat-item fade-up">
-        <div class="stat-number">100%</div>
+        <div class="stat-number"><span class="counter" data-target="100">0</span>%</div>
         <div class="stat-label">Engagements tenus</div>
       </div>
       <div class="stat-item fade-up">
-        <div class="stat-number">5★</div>
+        <div class="stat-number"><span class="counter" data-target="5">0</span>★</div>
         <div class="stat-label">Avis Google</div>
       </div>
     </div>
@@ -199,6 +199,39 @@
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.1 });
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Counter Animation
+    const counters = document.querySelectorAll('.counter');
+    let counted = false;
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !counted) {
+          counted = true;
+          counters.forEach(counter => {
+            const target = +counter.getAttribute('data-target');
+            const duration = 1500; // 1.5s
+            const interval = 20; 
+            const step = Math.max(1, Math.ceil(target / (duration / interval)));
+            let current = 0;
+            const updateCounter = () => {
+              current += step;
+              if (current < target) {
+                counter.innerText = current;
+                setTimeout(updateCounter, interval);
+              } else {
+                counter.innerText = target;
+              }
+            };
+            updateCounter();
+          });
+        }
+      });
+    }, { threshold: 0.5 });
+    
+    const statsSection = document.getElementById('stats-section');
+    if (statsSection) {
+      counterObserver.observe(statsSection);
+    }
   </script>
 </body>
 </html>
