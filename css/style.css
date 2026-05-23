@@ -77,7 +77,7 @@ img { max-width: 100%; height: auto; }
 .hero-title { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; line-height: 1.15; margin: 1.5rem 0; }
 .hero-subtitle { font-size: 1.1rem; color: #404040; margin-bottom: 2.5rem; }
 .hero-buttons { display: flex; gap: 1rem; }
-.hero-truck { position: absolute; bottom: -58%; right: -40%; width: 85%; max-width: 1100px; z-index: 4; }
+.hero-truck { position: absolute; bottom: -62%; right: -40%; width: 85%; max-width: 1100px; z-index: 4; }
 .hero-truck img { width: 100%; filter: drop-shadow(-10px 15px 25px rgba(0,0,0,0.4)); }
 
 /* Section Standard */
